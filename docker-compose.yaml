@@ -76,6 +76,16 @@ services:
       mysql8:
         condition: service_healthy
 
+  rabbitmq:
+    image: rabbitmq:3.12.6-management
+    env_file:
+      - ./rabbitmq/.env
+    volumes:
+      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
 volumes:
   mysql8_data: { }
   elasticsearch_data: { }
