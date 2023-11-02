@@ -3,8 +3,14 @@ version: "3.8"
 services:
   mysql8:
     image: mysql:8.1.0
-    env_file:
-      - ./mysql/8/.env
+#    env_file:
+#      - ./mysql/8/.env
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      LANG: C.UTF-8
     volumes:
       - mysql8_data:/var/lib/mysql
       - ./mysql/8/conf:/etc/mysql/conf.d
@@ -19,23 +25,27 @@ services:
       timeout: 10s
       retries: 10
 
-  #  postgres:
-  #    image: "postgres:12.2"
-  #    volumes:
-  #      - postgres_data:/var/lib/postgresql/data
-  #    env_file:
-  #      - ./postgres/.env
-  #    ports:
-  #      - "5432"
-  #    networks:
-  #      - "network1"
+#  postgres:
+#    image: "postgres:12.2"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_USER: test
+#      POSTGRES_PASSWORD: test
+#      POSTGRES_DB: testdb
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - "default"
 
   elasticsearch:
     image: "elasticsearch:7.17.7"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-    env_file:
-      - ./elasticsearch/.env
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx1024m
+      discovery.type: single-node
+      xpack.security.enabled: false
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -60,8 +70,8 @@ services:
   #      MINIO_ROOT_PASSWORD: minio
   #    command: server --address :9000 --console-address :9001 --compat /data
   #    ports:
-  #      - "9000"
-  #      - "9001"
+  #      - "9000:9000"
+  #      - "9001:9001"
 
   nacos:
     image: nacos/nacos-server:v2.2.3
@@ -78,8 +88,9 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.12.6-management
-    env_file:
-      - ./rabbitmq/.env
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
     volumes:
       - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
     ports:
