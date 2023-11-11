@@ -109,7 +109,7 @@ services:
 volumes:
   mysql8_data: { }
   elasticsearch_data: { }
-  # postgres_data: {}
+  postgres_data: {}
   # minio_data: {}
 
 networks:
