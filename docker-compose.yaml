@@ -3,8 +3,8 @@ version: "3.8"
 services:
   mysql8:
     image: mysql:8.1.0
-#    env_file:
-#      - ./mysql/8/.env
+    #    env_file:
+    #      - ./mysql/8/.env
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: testdb
@@ -109,8 +109,8 @@ services:
 volumes:
   mysql8_data: { }
   elasticsearch_data: { }
-  postgres_data: {}
+  postgres_data: { }
   # minio_data: {}
 
 networks:
-  default: {}
+  default: { }
