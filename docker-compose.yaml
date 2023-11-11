@@ -27,19 +27,18 @@ services:
     networks:
       - "default"
 
-
-  #  postgres:
-#    image: "postgres:12.2"
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
-#    environment:
-#      POSTGRES_USER: test
-#      POSTGRES_PASSWORD: test
-#      POSTGRES_DB: testdb
-#    ports:
-#      - "5432:5432"
-#    networks:
-#      - "default"
+  postgres:
+    image: "postgres:12.2"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    networks:
+      - "default"
 
   elasticsearch:
     image: "elasticsearch:7.17.7"
