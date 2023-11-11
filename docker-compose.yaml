@@ -28,7 +28,7 @@ services:
       - "default"
 
   postgres:
-    image: "postgres:12.2"
+    image: "postgres:13.12"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
